@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux'
 import { addTodo } from "../features/todo/TodoSlice";
 
-export default function AddTodo(){
+export default function AddTodo({todoMsg, isEdit, setIsEdit}){
     const [input, setInput] = useState("")
     // const todoMsg = useSelector(state => state.todoMsg)
     // const [editMsg, setEditMsg] = useState(todoMsg)
@@ -14,12 +14,13 @@ export default function AddTodo(){
         setInput("")
     }
 
-    // useEffect(()=>{
-    //     setInput(editMsg)
-    // }, [editMsg])
-    // useEffect(() => {
-    //     setEditMsg(todoMsg)
-    // }, [todoMsg])
+    useEffect(() => {
+        if(isEdit) {
+            setInput(todoMsg)
+            setIsEdit(false)
+        }
+    }, [isEdit])
+
     return (
         <>
             <div>

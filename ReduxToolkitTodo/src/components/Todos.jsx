@@ -7,17 +7,23 @@ export default function Todos() {
     const todos = useSelector(state => state.todos)
   
     const dispatch = useDispatch()
+
+    const [todoMsg, setTodoMsg] = useState("")
+    const [isEdit, setIsEdit] = useState(false)
     
 
     return (
         <>
-            <AddTodo/>
+            <AddTodo todoMsg={todoMsg} isEdit={isEdit} setIsEdit={setIsEdit}/>
             {todos.map(todo => (
                 <li key={todo.id}>
                     <span>
                         {todo.text}
                     </span>
-                    {/* <button onClick={}>edit</button> */}
+                    <button onClick={() => {setTodoMsg(todo.text)
+                        setIsEdit(true)
+                        dispatch(removeTodo(todo.id))
+                    }}>edit</button>
                     { }
                     <button onClick={() => dispatch(removeTodo(todo.id))}>delete</button>
                 </li>
